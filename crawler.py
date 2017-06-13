@@ -1,0 +1,48 @@
+from bs4 import BeautifulSoup
+import requests
+
+
+def parse_html():
+    # type: () -> void
+    url = "https://developer.apple.com/videos/wwdc2017"
+    res = requests.get(url)
+
+    # find the section all sessions
+    soup = BeautifulSoup(res.text, 'html.parser')
+    section = soup.findAll('section', {'class': 'all-content'})
+
+    # parse each data of all sessions
+    soup2 = BeautifulSoup(str(section), 'html.parser')
+    images = soup2.findAll('img')
+    smaller_description = soup2.findAll('p', {'class': 'description smaller'})
+    hyper_links = soup2.findAll('a', href=True)
+
+    # write file
+    file_handler_title = open('./WWDC_session_title.md', 'w')
+    file_handler_content = open('./WWDC_session_content.md', 'w')
+    if len(images) == len(smaller_description):
+        print('Number of Sessions:' + str(len(images)))
+        for index in range(0, len(images), 1):
+            # content
+            title = '##' + images[index]['alt']
+            description = smaller_description[index].text
+            hyperlink1 = '[link](' + url + hyper_links[index]['href'] + ')'
+            hyperlink2 = str(index+1) + '. [' + images[index]['alt'] + '](' + url + hyper_links[index]['href'] + ')'
+
+            # file_handler_content
+            file_handler_content.write(title)
+            file_handler_content.write("\n")
+            file_handler_content.write(description)
+            file_handler_content.write("\n")
+            file_handler_content.write(hyperlink1)
+            file_handler_content.write("\n")
+
+            # file_handler_title
+            file_handler_title.write(hyperlink2)
+            file_handler_title.write("\n")
+
+    file_handler_content.close()
+    file_handler_title.close()
+
+if __name__ == '__main__':
+    parse_html()
