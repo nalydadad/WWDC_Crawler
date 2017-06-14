@@ -37,6 +37,7 @@ def parse_html():
             file_handler_content.write("\n")
             file_handler_content.write(hyperlink1)
             file_handler_content.write("\n")
+            file_handler_content.write("\n")
 
             # file_handler_title
             file_handler_title.write(hyperlink2)
