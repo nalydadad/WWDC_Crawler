@@ -26,8 +26,9 @@ def parse_html():
             # content
             title = '##' + images[index]['alt']
             description = smaller_description[index].text
-            hyperlink1 = '[link](' + url + hyper_links[index]['href'] + ')'
-            hyperlink2 = str(index+1) + '. [' + images[index]['alt'] + '](' + url + hyper_links[index]['href'] + ')'
+            hyperlink = url + hyper_links[index * 2]['href']
+            hyperlink1 = '[link](' + hyperlink + ')'
+            hyperlink2 = str(index+1) + '. [' + images[index]['alt'] + '](' + hyperlink + ')'
 
             # file_handler_content
             file_handler_content.write(title)
