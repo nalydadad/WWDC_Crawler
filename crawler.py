@@ -30,7 +30,7 @@ def parse_html():
         print('Number of Sessions:' + str(len(images)))
         for index in range(0, len(images), 1):
             # content
-            title = '##' + images[index]['alt']
+            title = '## ' + images[index]['alt']
             description = smaller_description[index].text
             hyperlink = url + hyper_links[index * 2]['href']
             hyperlink1 = '[link](' + hyperlink + ')'
