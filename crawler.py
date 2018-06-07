@@ -14,7 +14,7 @@ def parse_html():
     # parse each data of all sessions
     soup2 = BeautifulSoup(str(section), 'html.parser')
     images = soup2.findAll('img')
-    smaller_description = soup2.findAll('p', {'class': 'description smaller'})
+    smaller_description = soup2.findAll('p', {'class': 'description'})
     hyper_links = soup2.findAll('a', href=True)
 
     # write file
