@@ -1,10 +1,16 @@
 from bs4 import BeautifulSoup
 import requests
-
+import sys
 
 def parse_html():
     # type: () -> void
-    url = "https://developer.apple.com/videos/wwdc2017"
+    year = 2018
+    if len(sys.argv) > 1:
+        year = sys.argv[1]
+    
+    url = "https://developer.apple.com/videos/wwdc" + year
+    print('Parsing ' + url + ' ...')
+
     res = requests.get(url)
 
     # find the section all sessions
@@ -18,8 +24,8 @@ def parse_html():
     hyper_links = soup2.findAll('a', href=True)
 
     # write file
-    file_handler_title = open('./WWDC_session_title.md', 'w')
-    file_handler_content = open('./WWDC_session_content.md', 'w')
+    file_handler_title = open('./WWDC'+ year +'_session_title.md', 'w')
+    file_handler_content = open('./WWDC'+ year +'_session_content.md', 'w')
     if len(images) == len(smaller_description):
         print('Number of Sessions:' + str(len(images)))
         for index in range(0, len(images), 1):
