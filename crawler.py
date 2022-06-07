@@ -7,9 +7,9 @@ def parse_html():
     year = 2022
     if len(sys.argv) > 1:
         year = sys.argv[1]
-    year = f"wwdc{year}"
+    wwdc_year = f"wwdc{year}"
     
-    url = "https://developer.apple.com/videos/" + year
+    url = "https://developer.apple.com/videos/" + wwdc_year
     print('Parsing ' + url + ' ...')
 
     res = requests.get(url)
